@@ -9,9 +9,16 @@
 import UIKit
 
  class SourcesViewController: UITableViewController{
-
+    var questions = [[String: String]]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Trivia Questions"
+        let query = "https://opentdb.com/api.php?amount=50&difficulty=medium&type=multiple"
+        
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
