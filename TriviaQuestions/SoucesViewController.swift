@@ -35,12 +35,10 @@ import UIKit
             let category = query["category"].stringValue
             let question = query["question"].stringValue
             let correct = query["correct_answer"].stringValue
-            let incorrect = query["incorrect_answer"].arrayValue
+            let incorrect = query["incorrect_answers"].arrayValue
             let incorrectOne = incorrect[0].stringValue
             let incorrectTwo = incorrect[1].stringValue
             let incorrectThree = incorrect[2].stringValue
-            
-            
             let temp = ["category": category, "question": question, "correct": correct, "incorrectOne": incorrectOne,"incorrectTwo":incorrectTwo,"incorrectThree":incorrectThree]
             questions.append(temp)
         }
@@ -52,8 +50,22 @@ import UIKit
                                       message: "There was a problem loading the random questions",
                                       preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil) }
+        present(alert, animated: true, completion: nil)
+    }
     
-
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return questions.count
+    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let source = questions[indexPath.row]
+        cell.textLabel?.text = source["question"]
+        cell.detailTextLabel?.text = source["source"]
+        return cell
+    }
+    
+    
 }
+
+
 
