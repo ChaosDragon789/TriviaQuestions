@@ -9,58 +9,54 @@
 import UIKit
 
  class SourcesViewController: UITableViewController{
-    var questions = [[String: String]]()
+    var jokes = [[String: String]]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Trivia Questions"
-        let query = "https://opentdb.com/api.php?amount=50&difficulty=medium&type=multiple"
-        
+        self.title = "Random Jokes"
+        let query = "https://official-joke-api.appspot.com/random_ten"
         
         if let url = URL(string: query) {
             if let data = try? Data(contentsOf: url) {
                 let json = try! JSON(data: data)
-                if json["response_code"] == 0 {
+                
                     parse(json: json)
                     return
-                }
+                
             }
         }
         loadError()
     }
     
     func parse(json: JSON) {
-        for query in json["results"].arrayValue {
-            let category = query["category"].stringValue
-            let question = query["question"].stringValue
-            let correct = query["correct_answer"].stringValue
-            let incorrect = query["incorrect_answers"].arrayValue
-            let incorrectOne = incorrect[0].stringValue
-            let incorrectTwo = incorrect[1].stringValue
-            let incorrectThree = incorrect[2].stringValue
-            let temp = ["category": category, "question": question, "correct": correct, "incorrectOne": incorrectOne,"incorrectTwo":incorrectTwo,"incorrectThree":incorrectThree]
-            questions.append(temp)
+        for query in json.arrayValue {
+            let type = query["type"].stringValue
+            let setup = query["setup"].stringValue
+            let punchline = query["punchline"].stringValue
+            
+            let temp = ["type":type,"setup":setup,"punchline":punchline]
+            jokes.append(temp)
         }
         tableView.reloadData()
     }
     
     func loadError() {
         let alert = UIAlertController(title: "Loading Error",
-                                      message: "There was a problem loading the random questions",
+                                      message: "There was a problem loading the jokes",
                                       preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return questions.count
+        return jokes.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let source = questions[indexPath.row]
-        cell.textLabel?.text = source["question"]
-        cell.detailTextLabel?.text = source["source"]
+        let source = jokes[indexPath.row]
+        cell.textLabel?.text = source["type"]
+        cell.detailTextLabel?.text = source["setup"]
         return cell
     }
     
