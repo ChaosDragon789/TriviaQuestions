@@ -16,17 +16,21 @@ import UIKit
         super.viewDidLoad()
         self.title = "Random Jokes"
         let query = "https://official-joke-api.appspot.com/random_ten"
+        DispatchQueue.global(qos: .userInitiated).async {
+            [unowned self] in
+            
         
         if let url = URL(string: query) {
             if let data = try? Data(contentsOf: url) {
                 let json = try! JSON(data: data)
                 
-                    parse(json: json)
+                    self.parse(json: json)
                     return
                 
             }
         }
-        loadError()
+        self.loadError()
+        }
     }
     
     func parse(json: JSON) {
@@ -38,15 +42,22 @@ import UIKit
             let temp = ["type":type,"setup":setup,"punchline":punchline]
             jokes.append(temp)
         }
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            [unowned self] in
+            self.tableView.reloadData()
+        }
     }
     
     func loadError() {
+        DispatchQueue.main.async {
+            [unowned self] in
+           
         let alert = UIAlertController(title: "Loading Error",
                                       message: "There was a problem loading the jokes",
                                       preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
