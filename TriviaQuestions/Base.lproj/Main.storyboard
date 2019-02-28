@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -40,6 +41,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Sob-gK-5jF" kind="show" id="i4B-iV-7rh"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -47,11 +51,40 @@
                             <outlet property="delegate" destination="Mug-5f-cGa" id="tAq-ZA-1gZ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="lL7-bJ-WD5"/>
+                    <navigationItem key="navigationItem" id="lL7-bJ-WD5">
+                        <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="z81-lJ-2uU"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1rm-Oi-6OV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3050.4000000000001" y="62.518740629685162"/>
+        </scene>
+        <!--Punchline View Controller-->
+        <scene sceneID="8LY-rF-swp">
+            <objects>
+                <viewController id="Sob-gK-5jF" customClass="PunchlineViewController" customModule="TriviaQuestions" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CjG-WW-GIG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W63-KL-bMq">
+                                <rect key="frame" x="100" y="164" width="175" height="229"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="sGe-jT-r5B"/>
+                    </view>
+                    <connections>
+                        <outlet property="punchlineLabel" destination="W63-KL-bMq" id="5YY-3s-xHq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k3r-0O-Lyu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3911.1999999999998" y="51.724137931034484"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="D6p-nO-gUI">

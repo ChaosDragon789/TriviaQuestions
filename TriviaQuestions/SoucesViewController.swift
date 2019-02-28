@@ -71,6 +71,13 @@ import UIKit
         return cell
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let dvc = segue.destination as! PunchlineViewController
+        let index = tableView.indexPathForSelectedRow?.row
+        let joke = jokes[index!]
+        dvc.punchline = joke["punchline"]!
+        
+    }
     
 }
 

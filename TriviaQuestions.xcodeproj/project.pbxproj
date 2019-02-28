@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		421399ED222850CE00AFA9B6 /* PunchlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421399EC222850CE00AFA9B6 /* PunchlineViewController.swift */; };
 		42DDA92E22245C2B00A2B66C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DDA92D22245C2B00A2B66C /* AppDelegate.swift */; };
 		42DDA93022245C2B00A2B66C /* SoucesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DDA92F22245C2B00A2B66C /* SoucesViewController.swift */; };
 		42DDA93322245C2B00A2B66C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42DDA93122245C2B00A2B66C /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		421399EC222850CE00AFA9B6 /* PunchlineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchlineViewController.swift; sourceTree = "<group>"; };
 		42DDA92A22245C2B00A2B66C /* TriviaQuestions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TriviaQuestions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42DDA92D22245C2B00A2B66C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42DDA92F22245C2B00A2B66C /* SoucesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoucesViewController.swift; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				42DDA92D22245C2B00A2B66C /* AppDelegate.swift */,
+				421399EC222850CE00AFA9B6 /* PunchlineViewController.swift */,
 				42DDA92F22245C2B00A2B66C /* SoucesViewController.swift */,
 				42DDA93122245C2B00A2B66C /* Main.storyboard */,
 				42DDA93422245C3000A2B66C /* Assets.xcassets */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42DDA9402224611200A2B66C /* SwiftyJSON.swift in Sources */,
+				421399ED222850CE00AFA9B6 /* PunchlineViewController.swift in Sources */,
 				42DDA93022245C2B00A2B66C /* SoucesViewController.swift in Sources */,
 				42DDA92E22245C2B00A2B66C /* AppDelegate.swift in Sources */,
 			);
