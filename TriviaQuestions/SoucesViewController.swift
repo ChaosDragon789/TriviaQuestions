@@ -38,9 +38,10 @@ import UIKit
             let type = query["type"].stringValue
             let setup = query["setup"].stringValue
             let punchline = query["punchline"].stringValue
-            
+            if type != "knock-knock"{
             let temp = ["type":type,"setup":setup,"punchline":punchline]
             jokes.append(temp)
+            }
         }
         DispatchQueue.main.async {
             [unowned self] in
@@ -52,12 +53,15 @@ import UIKit
         DispatchQueue.main.async {
             [unowned self] in
            
-        let alert = UIAlertController(title: "Loading Error",
-                                      message: "There was a problem loading the jokes",
-                                      preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Loading Error",message: "There was a problem loading the jokes",preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    @IBAction func refreshButton(_ sender: UIBarButtonItem) {
+        jokes = [[String: String]]()
+        self.viewDidLoad()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,10 +70,10 @@ import UIKit
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let source = jokes[indexPath.row]
-        cell.textLabel?.text = source["type"]
-        cell.detailTextLabel?.text = source["setup"]
+        cell.textLabel?.text = source["setup"]
         return cell
     }
+   
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let dvc = segue.destination as! PunchlineViewController
