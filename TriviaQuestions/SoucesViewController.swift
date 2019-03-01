@@ -8,9 +8,8 @@
 
 import UIKit
 
- class SourcesViewController: UITableViewController{
+class SourcesViewController: UITableViewController{
     var jokes = [[String: String]]()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,18 +17,14 @@ import UIKit
         let query = "https://official-joke-api.appspot.com/random_ten"
         DispatchQueue.global(qos: .userInitiated).async {
             [unowned self] in
-            
-        
-        if let url = URL(string: query) {
-            if let data = try? Data(contentsOf: url) {
-                let json = try! JSON(data: data)
-                
+            if let url = URL(string: query) {
+                if let data = try? Data(contentsOf: url) {
+                    let json = try! JSON(data: data)
                     self.parse(json: json)
                     return
-                
+                }
             }
-        }
-        self.loadError()
+            self.loadError()
         }
     }
     
@@ -39,8 +34,8 @@ import UIKit
             let setup = query["setup"].stringValue
             let punchline = query["punchline"].stringValue
             if type != "knock-knock"{
-            let temp = ["type":type,"setup":setup,"punchline":punchline]
-            jokes.append(temp)
+                let temp = ["type":type,"setup":setup,"punchline":punchline]
+                jokes.append(temp)
             }
         }
         DispatchQueue.main.async {
@@ -52,37 +47,43 @@ import UIKit
     func loadError() {
         DispatchQueue.main.async {
             [unowned self] in
-           
-        let alert = UIAlertController(title: "Loading Error",message: "There was a problem loading the jokes",preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+            
+            let alert = UIAlertController(title: "Loading Error",message: "There was a problem loading the jokes",preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
     @IBAction func refreshButton(_ sender: UIBarButtonItem) {
         jokes = [[String: String]]()
-        self.viewDidLoad()
+        let query = "https://official-joke-api.appspot.com/random_ten"
+        if let url = URL(string: query) {
+            if let data = try? Data(contentsOf: url) {
+                let json = try! JSON(data: data)
+                parse(json: json)
+                return
+            }
+        }
+        loadError()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return jokes.count
     }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let source = jokes[indexPath.row]
         cell.textLabel?.text = source["setup"]
         return cell
     }
-   
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let dvc = segue.destination as! PunchlineViewController
         let index = tableView.indexPathForSelectedRow?.row
         let joke = jokes[index!]
         dvc.punchline = joke["punchline"]!
-        
     }
-    
 }
 
 
